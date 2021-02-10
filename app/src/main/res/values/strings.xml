@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">ZikFrip</string>
+    <string name="app_name">Zik\'frip</string>
+
+    <!--Top bar-->
+    <string name="titleHome">Accueil</string>
+    <string name="titleArticles">Articles</string>
+    <string name="titleOrders">Mes commandes</string>
+    <string name="titleCategories">Guitare</string>
+
+    <!--UserWheel-->
+    <string name="ParamsWheel">Paramètres</string>
+    <string name="OrdersWheel">Vos commandes</string>
+    <string name="LogoutWheel">Se déconnecter</string>
+
+    <!--HomePage-->
+    <string name="subTitleFront">À la une</string>
+    <string name="subtitleCategories">Catégories</string>
+
+    <!--ArticlesPage-->
+    <string name="buy">Acheter</string>
+    <string name="articleExempleTitle">Stratocaster</string>
+    <string name="articleExempleDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus tempor fringilla aliquet sagittis, mi, sit cum. Ultricies pretium etiam sed id duis nibh egestas facilisi venenatis. Ut nisl varius ut augue arcu. Nam et aliquam nunc id nisl, eget suspendisse mi.</string>
+    <string name="articleExemplePrice">100,-€</string>
+
+
+
+
+
 </resources>
