@@ -21,9 +21,8 @@
     <string name="articleExempleTitle">Stratocaster</string>
     <string name="articleExempleDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus tempor fringilla aliquet sagittis, mi, sit cum. Ultricies pretium etiam sed id duis nibh egestas facilisi venenatis. Ut nisl varius ut augue arcu. Nam et aliquam nunc id nisl, eget suspendisse mi.</string>
     <string name="articleExemplePrice">100,-€</string>
-
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

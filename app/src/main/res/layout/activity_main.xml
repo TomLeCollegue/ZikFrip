@@ -6,13 +6,146 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="40dp"
+        android:layout_height="49dp"
+        android:layout_margin="@dimen/default_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
     <TextView
+        android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:text="@string/app_name"
+        app:layout_constraintStart_toEndOf="@+id/imageLogo"
+        app:layout_constraintTop_toTopOf="@+id/imageLogo"
+        style="@style/TitleTextStyle"/>
+
+    <TextView
+        android:id="@+id/textSubtitle"
+        style="@style/DefaultTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titleHome"
+        app:layout_constraintStart_toStartOf="@+id/textTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="@dimen/default_margin"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageLogo">
+
+        <ImageView
+            android:id="@+id/imageUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/tomkubasik" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/PopUpUser"
+        android:layout_width="190dp"
+        android:layout_height="115dp"
+        app:cardBackgroundColor="@color/almostWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/paramicon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_margin="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/paramwheel" />
+
+            <TextView
+                android:id="@+id/textParam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ParamsWheel"
+                app:layout_constraintBottom_toBottomOf="@+id/paramicon"
+                app:layout_constraintStart_toEndOf="@+id/paramicon"
+                app:layout_constraintTop_toTopOf="@+id/paramicon"
+                android:layout_marginLeft="@dimen/item_margin"
+                style="@style/TitleTextStyle"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/ordericon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_margin="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paramicon"
+                app:srcCompat="@drawable/cartbow" />
+
+            <TextView
+                android:id="@+id/textOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/OrdersWheel"
+                android:layout_marginLeft="@dimen/item_margin"
+                app:layout_constraintBottom_toBottomOf="@+id/ordericon"
+                app:layout_constraintStart_toEndOf="@+id/ordericon"
+                app:layout_constraintTop_toTopOf="@+id/ordericon"
+                style="@style/TitleTextStyle"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/logouticon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_margin="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ordericon"
+                app:srcCompat="@drawable/logout" />
+
+            <TextView
+                android:id="@+id/textLogout"
+                style="@style/TitleTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/LogoutWheel"
+                android:layout_marginLeft="@dimen/item_margin"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/logouticon"
+                app:layout_constraintStart_toEndOf="@+id/logouticon"
+                app:layout_constraintTop_toTopOf="@+id/logouticon" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.entreprisecorp.zikfrip.HomeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSubtitle" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
