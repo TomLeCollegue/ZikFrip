@@ -5,7 +5,6 @@
     android:layout_width="130dp"
     android:layout_height="202dp"
     android:layout_marginRight="@dimen/item_margin"
-    android:elevation="5dp"
     app:cardCornerRadius="13dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +25,7 @@
             android:layout_height="20dp"
             android:layout_margin="5dp"
             app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/almostBack"
             app:layout_constraintBottom_toBottomOf="@+id/imageItem"
             app:layout_constraintEnd_toEndOf="@+id/imageItem">
 

@@ -8,10 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="Primary">#455A64</color>
+    <color name="Primary">#FFFFFF</color>
     <color name="Secondary">#718792</color>
     <color name="Third">#1C313A</color>
     <color name="orange">#FFB74D</color>
-    <color name="almostBack">#F2F2F2</color>
+    <color name="almostBack">#455A64</color>
 
 </resources>
