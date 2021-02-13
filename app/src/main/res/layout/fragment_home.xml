@@ -17,15 +17,16 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewCategories"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+
+                android:layout_marginRight="@dimen/default_margin"
                 android:orientation="vertical"
 
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_margin"
-
-                app:layout_constraintStart_toStartOf="@+id/textCategories"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textCategories" />
 
             <androidx.recyclerview.widget.RecyclerView

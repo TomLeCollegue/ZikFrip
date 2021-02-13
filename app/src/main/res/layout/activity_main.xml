@@ -142,7 +142,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.entreprisecorp.zikfrip.CategoryFragment"
+        android:name="com.entreprisecorp.zikfrip.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="90dp"

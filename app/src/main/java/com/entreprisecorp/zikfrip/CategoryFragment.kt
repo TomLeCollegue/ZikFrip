@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.entreprisecorp.zikfrip.ProductStorage.Singleton.productList
 import com.entreprisecorp.zikfrip.adapters.ProductAdapter
 
 class CategoryFragment : Fragment() {
@@ -25,7 +26,7 @@ class CategoryFragment : Fragment() {
 
         val recyclerViewProduct = view.findViewById<RecyclerView>(R.id.recyclerViewProducts)
         recyclerViewProduct.layoutManager = GridLayoutManager(activity, 2)
-        recyclerViewProduct.adapter = ProductAdapter(R.layout.item_product_layout)
+        recyclerViewProduct.adapter = ProductAdapter(R.layout.item_product_layout, productList, activity)
     }
 
 }
