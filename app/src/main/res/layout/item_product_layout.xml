@@ -17,7 +17,7 @@
         android:elevation="5dp">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"

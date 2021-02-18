@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.entreprisecorp.zikfrip.Product
 import com.entreprisecorp.zikfrip.R
 import kotlinx.android.synthetic.main.item_frontpage_layout.view.*
 
-class ProductAdapter(val layoutID : Int, val productList: List<Product>, val context: Context? ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(val layoutID : Int, val productList: List<Product>, val context: Context?) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val imageItem = view.findViewById<ImageView>(R.id.imageItem)
@@ -41,6 +43,18 @@ class ProductAdapter(val layoutID : Int, val productList: List<Product>, val con
         holder.nameItem?.text = currentProduct.name
         holder.descriptionItem?.text = currentProduct.description
         holder.priceItem?.text = currentProduct.price.toString() + ",-€"
+
+        holder.imageItem.setOnClickListener {
+
+            val bundle = bundleOf("position" to position)
+
+            if(layoutID == R.layout.item_frontpage_layout){
+                Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_productFragment, bundle);
+            }
+            else if(layoutID == R.layout.item_product_layout){
+                Navigation.findNavController(it).navigate(R.id.action_categoryFragment_to_productFragment, bundle);
+            }
+        }
     }
 
 }

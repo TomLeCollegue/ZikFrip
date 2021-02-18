@@ -7,5 +7,9 @@ class Product(
     val imageURL : String = "https://images.unsplash.com/photo-1606043526494-a853922f42e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     val price : Int = 100,
     val category : String
-
 )
+{
+    public fun priceToString() : String {
+        return "$price,-€"
+    }
+}
