@@ -67,12 +67,24 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/textDeliveryFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deliveryFee"
+        style="@style/DefaultTextStyle"
+        android:textSize="12sp"
+        android:textColor="@color/Secondary"
+        app:layout_constraintEnd_toEndOf="@+id/buttonBuy"
+        app:layout_constraintStart_toStartOf="@+id/buttonBuy"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuy" />
+
+    <TextView
         android:id="@+id/textDescProduct"
+        style="@style/DefaultTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="30dp"
         android:text="@string/articleExempleDescription"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBuy"
-        style="@style/DefaultTextStyle"/>
+        app:layout_constraintTop_toBottomOf="@+id/textDeliveryFee" />
 </androidx.constraintlayout.widget.ConstraintLayout>

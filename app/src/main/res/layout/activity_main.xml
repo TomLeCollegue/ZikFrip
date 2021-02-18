@@ -54,92 +54,6 @@
             app:srcCompat="@drawable/tomkubasik" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/PopUpUser"
-        android:layout_width="190dp"
-        android:layout_height="115dp"
-        app:cardBackgroundColor="@color/almostBack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        android:layout_marginRight="@dimen/default_margin"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="15dp"
-        android:visibility="gone">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/paramicon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_margin="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/paramwheel"
-                app:tint="@color/Primary"/>
-
-            <TextView
-                android:id="@+id/textParam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ParamsWheel"
-                app:layout_constraintBottom_toBottomOf="@+id/paramicon"
-                app:layout_constraintStart_toEndOf="@+id/paramicon"
-                app:layout_constraintTop_toTopOf="@+id/paramicon"
-                android:layout_marginLeft="@dimen/item_margin"
-                style="@style/TitleTextStyle"
-                android:textSize="18sp"/>
-
-            <ImageView
-                android:id="@+id/ordericon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_margin="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/paramicon"
-                app:srcCompat="@drawable/cartbow"
-                app:tint="@color/Primary"/>
-
-            <TextView
-                android:id="@+id/textOrder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/OrdersWheel"
-                android:layout_marginLeft="@dimen/item_margin"
-                app:layout_constraintBottom_toBottomOf="@+id/ordericon"
-                app:layout_constraintStart_toEndOf="@+id/ordericon"
-                app:layout_constraintTop_toTopOf="@+id/ordericon"
-                style="@style/TitleTextStyle"
-                android:textSize="18sp"/>
-
-            <ImageView
-                android:id="@+id/logouticon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_margin="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ordericon"
-                app:srcCompat="@drawable/logout"
-                app:tint="@color/Primary"/>
-
-            <TextView
-                android:id="@+id/textLogout"
-                style="@style/TitleTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/LogoutWheel"
-                android:layout_marginLeft="@dimen/item_margin"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/logouticon"
-                app:layout_constraintStart_toEndOf="@+id/logouticon"
-                app:layout_constraintTop_toTopOf="@+id/logouticon" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
     <fragment
         android:id="@+id/fragment2"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -152,6 +66,102 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="90dp"
         app:navGraph="@navigation/nav" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/popupLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/PopUpUser"
+            android:layout_width="190dp"
+            android:layout_height="115dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="@dimen/default_margin"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/almostBack"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/paramicon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_margin="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/paramwheel"
+                    app:tint="@color/Primary" />
+
+                <TextView
+                    android:id="@+id/textParam"
+                    style="@style/TitleTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_margin"
+                    android:text="@string/ParamsWheel"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/paramicon"
+                    app:layout_constraintStart_toEndOf="@+id/paramicon"
+                    app:layout_constraintTop_toTopOf="@+id/paramicon" />
+
+                <ImageView
+                    android:id="@+id/ordericon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_margin="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/paramicon"
+                    app:srcCompat="@drawable/cartbow"
+                    app:tint="@color/Primary" />
+
+                <TextView
+                    android:id="@+id/textOrder"
+                    style="@style/TitleTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_margin"
+                    android:text="@string/OrdersWheel"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ordericon"
+                    app:layout_constraintStart_toEndOf="@+id/ordericon"
+                    app:layout_constraintTop_toTopOf="@+id/ordericon" />
+
+                <ImageView
+                    android:id="@+id/logouticon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_margin="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ordericon"
+                    app:srcCompat="@drawable/logout"
+                    app:tint="@color/Primary" />
+
+                <TextView
+                    android:id="@+id/textLogout"
+                    style="@style/TitleTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_margin"
+                    android:text="@string/LogoutWheel"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/logouticon"
+                    app:layout_constraintStart_toEndOf="@+id/logouticon"
+                    app:layout_constraintTop_toTopOf="@+id/logouticon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

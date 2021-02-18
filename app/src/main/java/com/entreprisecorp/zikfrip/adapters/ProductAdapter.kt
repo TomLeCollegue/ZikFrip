@@ -11,9 +11,8 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.entreprisecorp.zikfrip.Product
+import com.entreprisecorp.zikfrip.storage.Product
 import com.entreprisecorp.zikfrip.R
-import kotlinx.android.synthetic.main.item_frontpage_layout.view.*
 
 class ProductAdapter(val layoutID : Int, val productList: List<Product>, val context: Context?) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
@@ -46,13 +45,14 @@ class ProductAdapter(val layoutID : Int, val productList: List<Product>, val con
 
         holder.imageItem.setOnClickListener {
 
-            val bundle = bundleOf("position" to position)
+            val bundle = bundleOf("product" to currentProduct)
 
             if(layoutID == R.layout.item_frontpage_layout){
                 Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_productFragment, bundle);
             }
-            else if(layoutID == R.layout.item_product_layout){
-                Navigation.findNavController(it).navigate(R.id.action_categoryFragment_to_productFragment, bundle);
+            else if(layoutID == R.layout.item_product_layout) {
+                Navigation.findNavController(it)
+                    .navigate(R.id.action_categoryFragment_to_productFragment, bundle);
             }
         }
     }

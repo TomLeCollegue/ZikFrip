@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
             app:destination="@id/productFragment" />
@@ -25,6 +29,10 @@
         <action
             android:id="@+id/action_categoryFragment_to_productFragment"
             app:destination="@id/productFragment" />
+        <argument
+            android:name="categoryName"
+            app:argType="string"
+            android:defaultValue="Guitare" />
     </fragment>
     <fragment
         android:id="@+id/productFragment"
@@ -36,4 +44,15 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.entreprisecorp.zikfrip.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
+    <action
+        android:id="@+id/action_global_ordersFragment"
+        app:destination="@id/ordersFragment" />
+     <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment" />
 </navigation>

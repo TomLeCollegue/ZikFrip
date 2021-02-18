@@ -1,18 +1,34 @@
 package com.entreprisecorp.zikfrip
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.entreprisecorp.zikfrip.ProductStorage.Singleton.productList
+import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.productList
 import com.entreprisecorp.zikfrip.adapters.ProductAdapter
+import com.entreprisecorp.zikfrip.storage.Product
+import com.entreprisecorp.zikfrip.storage.ProductStorage
 
 class CategoryFragment : Fragment() {
 
 
+    lateinit var ListProductCat : List<Product>
+
+    @SuppressLint("UseRequireInsteadOfGet")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        var category = arguments!!.getString("category")
+
+        ListProductCat = category?.let { ProductStorage.getProductbyCategoy(it) }!!
+
+        activity?.findViewById<TextView>(R.id.textSubtitle)?.text = category
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,7 +42,7 @@ class CategoryFragment : Fragment() {
 
         val recyclerViewProduct = view.findViewById<RecyclerView>(R.id.recyclerViewProducts)
         recyclerViewProduct.layoutManager = GridLayoutManager(activity, 2)
-        recyclerViewProduct.adapter = ProductAdapter(R.layout.item_product_layout, productList, activity)
+        recyclerViewProduct.adapter = ProductAdapter(R.layout.item_product_layout, ListProductCat, activity)
     }
 
 }
