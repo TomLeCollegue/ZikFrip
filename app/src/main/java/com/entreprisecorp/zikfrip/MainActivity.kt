@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.activity_main.*
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +21,10 @@ class MainActivity : AppCompatActivity() {
         val imageUser = findViewById<ImageView>(R.id.imageUser);
         val popUpUser = findViewById<CardView>(R.id.PopUpUser);
         val buttonOrders = findViewById<TextView>(R.id.textOrder)
+        val buttonParams = findViewById<TextView>(R.id.textParam)
         val fragment = findViewById<View>(R.id.fragment2)
         val imageLogo = findViewById<ImageView>(R.id.imageLogo)
-        val backgroundPopUp = findViewById<ConstraintLayout>(R.id.popupLayout)
+
 
 
         imageUser.setOnClickListener {
@@ -45,6 +47,12 @@ class MainActivity : AppCompatActivity() {
         buttonOrders.setOnClickListener {
             Navigation.findNavController(fragment)
                 .navigate(R.id.action_global_ordersFragment);
+            popupLayout.visibility = View.GONE
+        }
+
+        buttonParams.setOnClickListener {
+            Navigation.findNavController(fragment)
+                    .navigate(R.id.action_global_paramsFragment);
             popupLayout.visibility = View.GONE
         }
 

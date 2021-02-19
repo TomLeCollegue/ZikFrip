@@ -52,7 +52,16 @@
     <action
         android:id="@+id/action_global_ordersFragment"
         app:destination="@id/ordersFragment" />
-     <action
+    <action
         android:id="@+id/action_global_homeFragment"
-        app:destination="@id/homeFragment" />
+        app:destination="@id/homeFragment"
+        app:launchSingleTop="false" />
+    <fragment
+        android:id="@+id/paramsFragment"
+        android:name="com.entreprisecorp.zikfrip.ParamsFragment"
+        android:label="fragment_params"
+        tools:layout="@layout/fragment_params" />
+    <action
+        android:id="@+id/action_global_paramsFragment"
+        app:destination="@id/paramsFragment" />
 </navigation>
