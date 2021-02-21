@@ -1,8 +1,15 @@
 package com.entreprisecorp.zikfrip.storage
 
-import com.entreprisecorp.zikfrip.storage.Category
-import com.entreprisecorp.zikfrip.storage.Product
+import android.widget.TextView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.entreprisecorp.zikfrip.MainActivity
+import com.entreprisecorp.zikfrip.adapters.ProductAdapter
 import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.productList
+import org.json.JSONException
+import org.json.JSONObject
 
 class ProductStorage {
 
@@ -14,7 +21,8 @@ class ProductStorage {
                 "tres bon etat a vendre",
                 "https://dmldbxcvbvfk2.cloudfront.net/images/1962-fender-stratocaster-fiesta-red-6-1.jpg",
                 150,
-                "Guitares"
+                "Guitares",
+                0.0
             ),
             Product(
                 1,
@@ -22,7 +30,8 @@ class ProductStorage {
                 "Percu sympa",
                 "https://www.bax-shop.fr/blog/wp-content/uploads/2019/03/blog_cajon_ritmes.jpg",
                 100,
-                "Percussions"
+                "Percussions",
+                0.0
             ),
             Product(
                 2,
@@ -30,7 +39,8 @@ class ProductStorage {
                 "tres bon etat a vendre",
                 "https://dmldbxcvbvfk2.cloudfront.net/images/1962-fender-stratocaster-fiesta-red-6-1.jpg",
                 150,
-                "Guitares"
+                "Guitares",
+                0.0
             ),
             Product(
                 3,
@@ -38,7 +48,8 @@ class ProductStorage {
                 "Percu sympa",
                 "https://www.bax-shop.fr/blog/wp-content/uploads/2019/03/blog_cajon_ritmes.jpg",
                 100,
-                "Percussions"
+                "Percussions",
+                0.0
             ),
             Product(
                 4,
@@ -46,7 +57,8 @@ class ProductStorage {
                 "tres bon etat a vendre",
                 "https://dmldbxcvbvfk2.cloudfront.net/images/1962-fender-stratocaster-fiesta-red-6-1.jpg",
                 150,
-                "Guitares"
+                "Guitares",
+                0.0
             ),
             Product(
                 5,
@@ -54,7 +66,8 @@ class ProductStorage {
                 "Percu sympa",
                 "https://www.bax-shop.fr/blog/wp-content/uploads/2019/03/blog_cajon_ritmes.jpg",
                 100,
-                "Percussions"
+                "Percussions",
+                0.0
             ),
             Product(
                 6,
@@ -62,7 +75,8 @@ class ProductStorage {
                 "tres bon etat a vendre",
                 "https://dmldbxcvbvfk2.cloudfront.net/images/1962-fender-stratocaster-fiesta-red-6-1.jpg",
                 150,
-                "Guitares"
+                "Guitares",
+                0.0
             ),
             Product(
                 7,
@@ -70,7 +84,8 @@ class ProductStorage {
                 "Percu sympa",
                 "https://www.bax-shop.fr/blog/wp-content/uploads/2019/03/blog_cajon_ritmes.jpg",
                 100,
-                "Percussions"
+                "Percussions",
+                0.0
             )
 
 
@@ -92,26 +107,123 @@ class ProductStorage {
     }
 
     companion object{
-        fun CalculateDeliferyFee(price : Int) : Int{
+        fun CalculateDeliferyFee(product : Product, activity: MainActivity, text : TextView){
+            var deliveryFee : Double = 0.0
 
-            return 5
+            val jsonParams = JSONObject()
+            jsonParams.put("weight", product.price.toString())
+            jsonParams.put("distance", "1")
+            val queue = Volley.newRequestQueue(activity)
+
+            val url = "http://89.87.13.28:63984/MainREST-1.0-SNAPSHOT/REST/soap/calculDeliveryFee"
+            val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
+                try {
+                    val deliveryFeeString = response.getString("result")
+                    deliveryFee = deliveryFeeString.toDouble()
+                    text.text = "+ $deliveryFee € de livraison"
+                    product.deliveryFee = deliveryFee
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error -> error.printStackTrace() })
+            queue.add(request)
         }
 
 
 
-        fun getProductbyCategoy(category : String) : List<Product> {
+        fun getProductbyCategoy(category : String, listProduct:ArrayList<Product>, adapter: ProductAdapter, activity: MainActivity){
 
-            return productList.filter { it.category == category }
+
+            val jsonParams = JSONObject()
+            jsonParams.put("query", "{Category(name:\"$category\"){products{name price description imageURL}}}" )
+            val queue = Volley.newRequestQueue(activity)
+            val url = "http://192.168.1.54:8413/graphql/"
+            val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
+                try {
+                    listProduct.clear()
+                    val jsonData = response.getJSONObject("data")
+                    val jsonArray = jsonData.getJSONArray("Category")
+                    val products = jsonArray.getJSONObject(0)
+                    val productsArray = products.getJSONArray("products")
+                    val arrayLenght = productsArray.length() -1
+
+                    for (i in 0..arrayLenght) {
+                        val productJson = productsArray.getJSONObject(i)
+                        val name = productJson.getString("name")
+                        val price = productJson.getInt("price")
+                        val description = productJson.getString("description")
+                        val imageURL = productJson.getString("imageURL")
+                        val product = Product(i, name, description, imageURL, price, category, 0.0)
+                        listProduct.add(product)
+                        adapter.notifyDataSetChanged()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error -> error.printStackTrace() })
+            queue.add(request)
+
+
+
         }
 
-        fun getAllProduct() : List<Product> {
+        fun getAllProduct(idMax : Int, listProduct:ArrayList<Product>, adapter: ProductAdapter, activity: MainActivity){
 
-            return productList
+            val jsonParams = JSONObject()
+            jsonParams.put("query", "{Product{name price description imageURL}}" )
+            val queue = Volley.newRequestQueue(activity)
+            val url = "http://192.168.1.54:8413/graphql/"
+            val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
+                try {
+                    listProduct.clear()
+                    val jsonData = response.getJSONObject("data")
+                    val productsArray = jsonData.getJSONArray("Product")
+                    val arrayLenght = productsArray.length() -1
+
+                    for (i in 0..arrayLenght) {
+                        val productJson = productsArray.getJSONObject(i)
+                        val name = productJson.getString("name")
+                        val price = productJson.getInt("price")
+                        val description = productJson.getString("description")
+                        val imageURL = productJson.getString("imageURL")
+                        val product = Product(i, name, description, imageURL, price, "", 0.0)
+                        listProduct.add(product)
+                        adapter.notifyDataSetChanged()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error -> error.printStackTrace() })
+            queue.add(request)
         }
 
-        fun getFirstsproduct(idMax : Int): List<Product> {
+        fun getFirstsproduct(idMax : Int, listProduct:ArrayList<Product>, adapter: ProductAdapter, activity: MainActivity){
+            val jsonParams = JSONObject()
+            jsonParams.put("query", "{Product(first:$idMax){name price description imageURL}}" )
+            val queue = Volley.newRequestQueue(activity)
+            val url = "http://192.168.1.54:8413/graphql/"
+            val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
+                try {
+                    listProduct.clear()
+                    val jsonData = response.getJSONObject("data")
+                    val productsArray = jsonData.getJSONArray("Product")
+                    val arrayLenght = productsArray.length() -1
 
-            return productList.filter { it.id < idMax }
+                    for (i in 0..arrayLenght) {
+                        val productJson = productsArray.getJSONObject(i)
+                        val name = productJson.getString("name")
+                        val price = productJson.getInt("price")
+                        val description = productJson.getString("description")
+                        val imageURL = productJson.getString("imageURL")
+                        val product = Product(i, name, description, imageURL, price, "", 0.0)
+                        listProduct.add(product)
+                        adapter.notifyDataSetChanged()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error -> error.printStackTrace() })
+            queue.add(request)
         }
 
     }

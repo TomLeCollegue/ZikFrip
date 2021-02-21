@@ -30,8 +30,8 @@ class SessionStorage {
 
         fun getInfoSession(mainActivity: MainActivity){
             val sharedPref = mainActivity?.getPreferences(Context.MODE_PRIVATE)?:return
-            Singleton.nameSession = sharedPref.getString("name","lele").toString()
-            Singleton.firstnameSession = sharedPref.getString("firstname","lele").toString()
+            Singleton.nameSession = sharedPref.getString("name","Smith").toString()
+            Singleton.firstnameSession = sharedPref.getString("firstname","John").toString()
         }
 
     }

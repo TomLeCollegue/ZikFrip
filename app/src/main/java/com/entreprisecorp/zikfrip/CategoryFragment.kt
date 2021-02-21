@@ -16,15 +16,15 @@ import com.entreprisecorp.zikfrip.storage.ProductStorage
 
 class CategoryFragment : Fragment() {
 
-
-    lateinit var ListProductCat : List<Product>
+    var category = ""
+    val ListProductCat = ArrayList<Product>()
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var category = arguments!!.getString("category")
+        category = arguments!!.getString("category")!!
 
-        ListProductCat = category?.let { ProductStorage.getProductbyCategoy(it) }!!
+        //ListProductCat = category?.let { ProductStorage.getProductbyCategoy(it) }!!
 
         activity?.findViewById<TextView>(R.id.textSubtitle)?.text = category
 
@@ -42,7 +42,9 @@ class CategoryFragment : Fragment() {
 
         val recyclerViewProduct = view.findViewById<RecyclerView>(R.id.recyclerViewProducts)
         recyclerViewProduct.layoutManager = GridLayoutManager(activity, 2)
-        recyclerViewProduct.adapter = ProductAdapter(R.layout.item_product_layout, ListProductCat, activity)
+        val adapter = ProductAdapter(R.layout.item_product_layout, ListProductCat, activity)
+        recyclerViewProduct.adapter = adapter
+        ProductStorage.getProductbyCategoy(category,ListProductCat,adapter,activity as MainActivity)
     }
 
 }

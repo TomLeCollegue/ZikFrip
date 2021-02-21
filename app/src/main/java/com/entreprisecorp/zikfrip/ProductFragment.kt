@@ -9,24 +9,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.productList
 import com.entreprisecorp.zikfrip.storage.Product
 import com.entreprisecorp.zikfrip.storage.ProductStorage
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class ProductFragment : Fragment() {
 
     lateinit var product : Product
-    var deliveryFeePrice = 0
+    var deliveryFeePrice = 0.0
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         product = arguments!!.getParcelable("product")!!
         activity?.findViewById<TextView>(R.id.textSubtitle)?.text = "Article"
-        deliveryFeePrice = ProductStorage.CalculateDeliferyFee(product.price)
     }
 
 
@@ -44,9 +50,11 @@ class ProductFragment : Fragment() {
         val nameProduct = view.findViewById<TextView>(R.id.textNameProduct)
         val priceProduct = view.findViewById<TextView>(R.id.textPriceProduct)
         val descProduct = view.findViewById<TextView>(R.id.textDescProduct)
-        val deliveryFee = view.findViewById<TextView>(R.id.textDeliveryFee)
+        val deliveryFeeText = view.findViewById<TextView>(R.id.textDeliveryFee)
 
-        deliveryFee.text = "+ $deliveryFeePrice,-€ de livraison"
+        //On calcule les frais de port
+        ProductStorage.CalculateDeliferyFee(product, activity as MainActivity,deliveryFeeText)
+
 
         activity?.let {
             Glide.with(it).load(Uri.parse(product.imageURL)).into(imageProduct)

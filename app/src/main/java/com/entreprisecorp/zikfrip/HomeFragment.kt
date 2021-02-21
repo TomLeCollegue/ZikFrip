@@ -11,11 +11,14 @@ import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.categoriesLis
 import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.productList
 import com.entreprisecorp.zikfrip.adapters.CategoriesAdapter
 import com.entreprisecorp.zikfrip.adapters.ProductAdapter
+import com.entreprisecorp.zikfrip.storage.Product
 import com.entreprisecorp.zikfrip.storage.ProductStorage
 
 
 class HomeFragment(
 ) : Fragment() {
+
+    val ListProduct = ArrayList<Product>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +41,11 @@ class HomeFragment(
         val recyclerViewCategories = view.findViewById<RecyclerView>(R.id.recyclerViewCategories)
 
 
-
-        recyclerViewFront.adapter = ProductAdapter(R.layout.item_frontpage_layout, ProductStorage.getFirstsproduct(4), activity)
+        val adapter = ProductAdapter(R.layout.item_frontpage_layout, ListProduct, activity)
+        recyclerViewFront.adapter = adapter
         recyclerViewCategories.adapter = CategoriesAdapter(categoriesList, activity)
+
+        ProductStorage.getFirstsproduct(4,ListProduct,adapter,activity as MainActivity)
 
 
 
