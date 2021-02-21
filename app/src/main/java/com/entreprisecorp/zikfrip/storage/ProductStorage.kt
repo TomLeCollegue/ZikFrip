@@ -10,6 +10,7 @@ import com.entreprisecorp.zikfrip.adapters.ProductAdapter
 import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.productList
 import org.json.JSONException
 import org.json.JSONObject
+import kotlin.math.round
 
 class ProductStorage {
 
@@ -115,11 +116,11 @@ class ProductStorage {
             jsonParams.put("distance", "1")
             val queue = Volley.newRequestQueue(activity)
 
-            val url = "http://89.87.13.28:63984/MainREST-1.0-SNAPSHOT/REST/soap/calculDeliveryFee"
+            val url = "http://89.87.13.28:55807/MainREST_war/REST/soap/calculDeliveryFee"
             val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
                 try {
                     val deliveryFeeString = response.getString("result")
-                    deliveryFee = deliveryFeeString.toDouble()
+                    deliveryFee = deliveryFeeString.toDouble().round(1)
                     text.text = "+ $deliveryFee € de livraison"
                     product.deliveryFee = deliveryFee
                 } catch (e: JSONException) {
@@ -137,7 +138,7 @@ class ProductStorage {
             val jsonParams = JSONObject()
             jsonParams.put("query", "{Category(name:\"$category\"){products{name price description imageURL}}}" )
             val queue = Volley.newRequestQueue(activity)
-            val url = "http://192.168.1.54:8413/graphql/"
+            val url = "http://89.87.13.28:8413/graphql/"
             val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
                 try {
                     listProduct.clear()
@@ -172,7 +173,7 @@ class ProductStorage {
             val jsonParams = JSONObject()
             jsonParams.put("query", "{Product{name price description imageURL}}" )
             val queue = Volley.newRequestQueue(activity)
-            val url = "http://192.168.1.54:8413/graphql/"
+            val url = "http://89.87.13.28:8413/graphql/"
             val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
                 try {
                     listProduct.clear()
@@ -201,7 +202,7 @@ class ProductStorage {
             val jsonParams = JSONObject()
             jsonParams.put("query", "{Product(first:$idMax){name price description imageURL}}" )
             val queue = Volley.newRequestQueue(activity)
-            val url = "http://192.168.1.54:8413/graphql/"
+            val url = "http://89.87.13.28:8413/graphql/"
             val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
                 try {
                     listProduct.clear()
@@ -225,6 +226,13 @@ class ProductStorage {
             }, Response.ErrorListener { error -> error.printStackTrace() })
             queue.add(request)
         }
+
+        fun Double.round(decimals: Int): Double {
+            var multiplier = 1.0
+            repeat(decimals) { multiplier *= 10 }
+            return round(this * multiplier) / multiplier
+        }
+
 
     }
 }

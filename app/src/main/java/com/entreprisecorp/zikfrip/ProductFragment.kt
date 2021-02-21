@@ -16,9 +16,11 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.entreprisecorp.zikfrip.payments.Payments
 import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.productList
 import com.entreprisecorp.zikfrip.storage.Product
 import com.entreprisecorp.zikfrip.storage.ProductStorage
+import kotlinx.android.synthetic.main.fragment_product.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -51,6 +53,7 @@ class ProductFragment : Fragment() {
         val priceProduct = view.findViewById<TextView>(R.id.textPriceProduct)
         val descProduct = view.findViewById<TextView>(R.id.textDescProduct)
         val deliveryFeeText = view.findViewById<TextView>(R.id.textDeliveryFee)
+        val payments = Payments()
 
         //On calcule les frais de port
         ProductStorage.CalculateDeliferyFee(product, activity as MainActivity,deliveryFeeText)
@@ -62,6 +65,10 @@ class ProductFragment : Fragment() {
         nameProduct.text = product.name
         priceProduct.text = product.priceToString()
         descProduct.text = product.description
+
+        buttonBuy.setOnClickListener {
+            payments.createNaturalClient("test","testName",activity as MainActivity)
+        }
 
 
     }
