@@ -55,49 +55,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardCvx" />
-
-    <TextView
-        android:id="@+id/cardNumber"
-        style="@style/DefaultTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:text="5549650000001239"
-        app:layout_constraintEnd_toEndOf="@+id/textFirstName"
-        app:layout_constraintStart_toStartOf="@+id/textFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/cardInfo" />
-
-    <TextView
-        android:id="@+id/cardExpirationDate"
-        style="@style/DefaultTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:text="0721"
-        app:layout_constraintEnd_toEndOf="@+id/textFirstName"
-        app:layout_constraintStart_toStartOf="@+id/textFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/cardNumber" />
-
-    <TextView
-        android:id="@+id/cardCvx"
-        style="@style/DefaultTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:text="069"
-        app:layout_constraintEnd_toEndOf="@+id/textFirstName"
-        app:layout_constraintStart_toStartOf="@+id/textFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/cardExpirationDate" />
-
-    <TextView
-        android:id="@+id/cardInfo"
-        style="@style/SubtitleTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:text="Info Carte Banquaire"
-        app:layout_constraintEnd_toEndOf="@+id/textFirstName"
-        app:layout_constraintStart_toStartOf="@+id/textFirstName"
         app:layout_constraintTop_toBottomOf="@+id/textFirstName" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

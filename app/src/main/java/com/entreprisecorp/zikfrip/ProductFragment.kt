@@ -2,6 +2,7 @@
 package com.entreprisecorp.zikfrip
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,9 @@ import com.entreprisecorp.zikfrip.payments.Payments
 import com.entreprisecorp.zikfrip.storage.ProductStorage.Singleton.productList
 import com.entreprisecorp.zikfrip.storage.Product
 import com.entreprisecorp.zikfrip.storage.ProductStorage
+import com.entreprisecorp.zikfrip.storage.SessionStorage
+import com.entreprisecorp.zikfrip.storage.SessionStorage.Singleton.firstnameSession
+import com.entreprisecorp.zikfrip.storage.SessionStorage.Singleton.nameSession
 import kotlinx.android.synthetic.main.fragment_product.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -57,6 +61,8 @@ class ProductFragment : Fragment() {
 
         //On calcule les frais de port
         ProductStorage.CalculateDeliferyFee(product, activity as MainActivity,deliveryFeeText)
+        //On recupere le nom et le prenom
+        SessionStorage.getInfoSession(activity as MainActivity)
 
 
         activity?.let {
@@ -67,10 +73,14 @@ class ProductFragment : Fragment() {
         descProduct.text = product.description
 
         buttonBuy.setOnClickListener {
-            payments.createNaturalClient("test","testName",activity as MainActivity)
+            payments.createNaturalClient(nameSession, firstnameSession, activity as MainActivity, product)
+
         }
 
 
     }
+
+
+
 
 }
