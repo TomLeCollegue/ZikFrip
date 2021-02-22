@@ -5,7 +5,7 @@
 ### TP d'INFO802
 #### Ce tp est constitué d'une application en Android Native Kotlin, et d'un serveur GlassFish
 ###   Download APK : [![APK](https://img.shields.io/static/v1?label=Zik'Frip:&message=v1.0&color=blue)](https://github.com/TomLeCollegue/GoalLifeApp/releases/download/v0.2/GoalLifeHelper.v0.2.apk)
-###   Repository du server : [![URL](https://img.shields.io/static/v1?label=TpInfo802-Server:&message=v0.2&color=blue)](https://github.com/TomLeCollegue/GoalLifeApp/releases/download/v0.2/GoalLifeHelper.v0.2.apk)
+###   Repository du server : [![URL](https://img.shields.io/static/v1?label=TpInfo802-Server:&message=v1.0&color=blue)](https://github.com/TomLeCollegue/TPInfo802-Server)
 
 ## `Hebergement`
 
@@ -265,9 +265,9 @@ A chaque fois qu'on clique sur `Acheter` on les choses suivantes :
 
 Si vous voulez voir le resultat d'un paiement dans la sandbox, 
 les identifiants sont :
-    * tomkubasik
-    * tomkubasik74200@gmail.com
-    * X4uDHVCDZzne8!w
+* tomkubasik
+* tomkubasik74200@gmail.com
+* X4uDHVCDZzne8!w
 
 
 
