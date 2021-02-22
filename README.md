@@ -1,4 +1,4 @@
-<img src="https://github.com/TomLeCollegue/GoalLifeApp/blob/main/forReadme/calendar.png?raw=true" alt="drawing" align="center" />
+<img src="http://89.87.13.28:8800/Fac/info802/logo.png" alt="drawing" align="center" width="100"/>
 
 ## `Zik'Frip` 
 
