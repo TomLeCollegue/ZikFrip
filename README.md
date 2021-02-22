@@ -5,7 +5,7 @@
 ### TP d'INFO802
 #### Ce tp est constitué d'une application en Android Native Kotlin, et d'un serveur GlassFish
 ###   Download APK : [![APK](https://img.shields.io/static/v1?label=Zik'Frip:&message=v1.0&color=blue)](https://github.com/TomLeCollegue/GoalLifeApp/releases/download/v0.2/GoalLifeHelper.v0.2.apk)
-###   Repo du server : [![URL](https://img.shields.io/static/v1?label=TpInfo802-Server:&message=v0.2&color=blue)](https://github.com/TomLeCollegue/GoalLifeApp/releases/download/v0.2/GoalLifeHelper.v0.2.apk)
+###   Repository du server : [![URL](https://img.shields.io/static/v1?label=TpInfo802-Server:&message=v0.2&color=blue)](https://github.com/TomLeCollegue/GoalLifeApp/releases/download/v0.2/GoalLifeHelper.v0.2.apk)
 
 ## `Hebergement`
 
@@ -207,11 +207,67 @@ Apres cela on recupère l'ID de l'utilisateur, et on demande a MangoPAY de nous 
 ```
 
 ## `Kotlin : L'application`
-Etant ammené à faire du Kotlin en Stage, j'ai pris la decision de faire ce TP en Android Kotlin 
+Etant ammené à faire du Kotlin en Stage, j'ai pris la decision de faire ce TP en Android Kotlin.
+Pour faire les requetes HTTP, j'utilise la librairie Volley developpée par google.
+Pour Afficher les images des produits, j'utilise la librairie GLIDE qui permet de recuperer une image à partir d'une URL
 
 <img src="http://89.87.13.28:8800/Fac/info802/homepage.png" alt="drawing" width="200" />    <img src="http://89.87.13.28:8800/Fac/info802/guitares.png" alt="drawing"   width="200"/>    <img src="http://89.87.13.28:8800/Fac/info802/Product.png" alt="drawing"   width="200" />    <img src="http://89.87.13.28:8800/Fac/info802/MangoPay.png" alt="drawing" width="200"/>
 
+
+
 ### La partie qui gère les requetes HTTP de graphQL et des frais de port se trouve dans le fichier [![URL](https://img.shields.io/static/v1?label=ProductStorage:&message=.kt&color=green)](https://github.com/TomLeCollegue/ZikFrip/blob/master/app/src/main/java/com/entreprisecorp/zikfrip/storage/ProductStorage.kt)
+
+On retrouve 3 fonctions utilisée :
+* Une fonction `CalculateDeliferyFee()` appelée a chaque affichage d'article qui recupère les frais de ports
+* Une fonction `getProductbyCategoy()` appelée quand on clique sur une categorie qui permet de recuperer tous les produits d'une catégorie
+* Une fonction `getFirstsproduct()` appelée pour avoir les produits "A la une" qui permet de recuperer les premiers produits de la base neo4j
+
+Exemple avec `getProductByCategory()`:
+```kotlin
+fun getProductbyCategoy(category : String, listProduct:ArrayList<Product>, adapter: ProductAdapter, activity: MainActivity){
+
+    val jsonParams = JSONObject()
+    jsonParams.put("query", "{Category(name:\"$category\"){products{name price description imageURL}}}" )
+    val queue = Volley.newRequestQueue(activity)
+    val url = "http://89.87.13.28:8413/graphql/"
+    val request = JsonObjectRequest(Request.Method.POST, url, jsonParams, Response.Listener { response ->
+        try {
+            listProduct.clear()
+            val jsonData = response.getJSONObject("data")
+            val jsonArray = jsonData.getJSONArray("Category")
+            val products = jsonArray.getJSONObject(0)
+            val productsArray = products.getJSONArray("products")
+            val arrayLenght = productsArray.length() -1
+
+            for (i in 0..arrayLenght) {
+                val productJson = productsArray.getJSONObject(i)
+                val name = productJson.getString("name")
+                val price = productJson.getInt("price")
+                val description = productJson.getString("description")
+                val imageURL = productJson.getString("imageURL")
+                val product = Product(i, name, description, imageURL, price, category, 0.0)
+                listProduct.add(product)
+                adapter.notifyDataSetChanged()
+            }
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }, Response.ErrorListener { error -> error.printStackTrace() })
+    queue.add(request)
+}
+```
+### La partie qui gère les requetes HTTP de MangoPay se trouve dans le fichier [![URL](https://img.shields.io/static/v1?label=Payments:&message=.kt&color=green)](https://github.com/TomLeCollegue/ZikFrip/blob/master/app/src/main/java/com/entreprisecorp/zikfrip/payments/Payments.kt)
+
+A chaque fois qu'on clique sur `Acheter` on les choses suivantes : 
+* On cree un utilisateur avec le nom et le prénom de la personne avec la fonction `createNaturalClient()` 
+* Avec L'id recupéré on execute la fonction `Pay()` qui nous donne une adresse URL de paiement web
+* Avec `getUrlFromIntent()` on ouvre le navigateur avec l'adresse recupérée
+
+Si vous voulez voir le resultat d'un paiement dans la sandbox, 
+les identifiants sont :
+    * tomkubasik
+    * tomkubasik74200@gmail.com
+    * X4uDHVCDZzne8!w
 
 
 
