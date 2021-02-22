@@ -4,7 +4,7 @@
 
 ### TP d'INFO802
 #### Ce tp est constitué d'une application en Android Native Kotlin, et d'un serveur GlassFish
-###   Download APK : [![APK](https://img.shields.io/static/v1?label=Zik'Frip:&message=v1.0&color=blue)](https://github.com/TomLeCollegue/GoalLifeApp/releases/download/v0.2/GoalLifeHelper.v0.2.apk)
+###   Download APK : [![APK](https://img.shields.io/static/v1?label=Zik'Frip:&message=v1.0&color=blue)](http://89.87.13.28:8181/nextcloud/index.php/s/PXTfYGYsadZYLg3)
 ###   Repository du server : [![URL](https://img.shields.io/static/v1?label=TpInfo802-Server:&message=v1.0&color=blue)](https://github.com/TomLeCollegue/TPInfo802-Server)
 
 ## `Hebergement`
