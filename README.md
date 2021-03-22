@@ -23,7 +23,7 @@ Nous avons donc deux applications dans le glassFish :
 * Une API REST communiquant avec le SOAP.
 
 ### SOAP :
-On a seulement une fonction qui prend un poigt et une distance et qui renvoit le resultat des frais de port
+On a seulement une fonction qui prend un poids et une distance et qui renvoit le resultat des frais de port
 
 ```java
 @WebService
